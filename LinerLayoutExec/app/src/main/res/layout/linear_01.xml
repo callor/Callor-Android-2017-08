@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    tools:context="com.bit.linearlayoutexec.MainActivity">
+
+    <!--
+    orientation
+        : horizontal : 기본값 : 가로뱡향
+        : vertical : 설정 : 세로방향
+     -->
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+
+        android:background="#202fca"
+
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLines="1"
+
+        android:text="안녕하세요"
+        android:textColor="#f5e319"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="2"
+        android:background="#202fca"
+        android:text="Korea"
+        android:textColor="#f5e319"
+        android:textSize="20dp" />
+
+    <!--
+        layout_ = "wrap_content" : text  값 만큼 크기 기정
+         maxLines = "1" : 줄바꿈하지 말라
+    -->
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="3"
+
+        android:background="#85c140"
+        android:ellipsize="marquee"
+        android:focusable="true"
+
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLines="1"
+        android:text="callor@callor.com"
+        android:textSize="20dp" />
+
+</LinearLayout>
+

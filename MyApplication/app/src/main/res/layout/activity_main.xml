@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:layout_gravity="end"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="#009688"
+        android:textSize="30dp"
+        android:textColor="#FF0000"
+        android:text="우리나라"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="#96002a"
+        android:textSize="30dp"
+        android:padding="5dp"
+        android:text="대한민국"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:background="#349600"
+        android:textSize="30dp"
+        android:text="Korea"/>
+
+</LinearLayout>

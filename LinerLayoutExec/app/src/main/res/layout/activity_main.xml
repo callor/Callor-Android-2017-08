@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.bit.linearlayoutexec.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="#ff0048"
+        android:layout_gravity="bottom"
+        android:text="Korea"/>
+
+
+    <!-- 외부의 layout xml 파일을 import -->
+    <!--
+    <include layout="@layout/linear_01" />
+    <include layout="@layout/linear_02" />
+    <include layout="@layout/linear_03" />
+    -->
+
+</LinearLayout>
