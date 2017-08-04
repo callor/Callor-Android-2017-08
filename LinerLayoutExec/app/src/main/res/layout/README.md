@@ -1,7 +1,6 @@
 
 ## 외부의 layout xml 파일을 import
 <code>
-
 	<include layout="@layout/linear_01" />
 	<include layout="@layout/linear_02" />
 	<include layout="@layout/linear_03" />
