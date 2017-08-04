@@ -31,9 +31,21 @@
 
 * height : 
 1. wrap_content : 표시할 내용만큼만 크기를 설정
-2. OBmatch_parent : 부모 view에 가득 차도록 크기 설정
-* 
+2. match_parent : 부모 view에 가득 차도록 크기 설정
+
+* gravity : 정렬
 
 ## TextView 속성
 * android:maxLines = "1" : 줄바꿈 하지 말라
+* Text 생략 문자 설정
+
+<code>
+
+	android:ellipsize="marquee"
+	android:focusable="true"
+
+	android:marqueeRepeatLimit="marquee_forever"
+	android:maxLines="1"
+
+</code>
 
