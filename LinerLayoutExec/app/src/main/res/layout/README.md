@@ -6,7 +6,10 @@
 	<include layout="@layout/linear_02" />
 	<include layout="@layout/linear_03" />
 
+</code>
+
 ## Linear Layout 속성
+<code>
 
 	<LinearLayout 
 	    xmlns:android="http://schemas.android.com/apk/res/android"
