@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.callor.textview.MainActivity">
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:shadowColor="#000000"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:textStyle="italic|bold"
+        android:textColor="#000dff"
+        android:gravity="center"
+        android:drawableLeft="@drawable/ic_android_black_24dp"
+        android:drawableTint="#bbff00"
+        android:text="안녕하세요" />
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#44ff00"
+        android:textSize="20sp"
+        android:gravity="right|end"
+        android:drawableLeft="@mipmap/ic_launcher_round"
+        android:text="Welcome" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#44ff00"
+        android:textSize="20sp"
+        android:gravity="left|start"
+        android:autoLink="email"
+        android:text="callor@callor.com" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="20sp"
+        android:gravity="start|left"
+        android:lines="5"
+        android:autoLink="email|web|phone"
+        android:text="naver.com \n callor@callor.com \n 010-1111-1234" />
+
+</LinearLayout>

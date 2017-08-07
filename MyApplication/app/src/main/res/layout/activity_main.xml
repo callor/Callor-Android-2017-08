@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="horizontal"
+<LinearLayout android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="10"
     android:layout_gravity="end"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" web : callor.com \n email : callor@callor.com  \n phone : 010-1234-9876 \n map : 620 Eighth Avenue New York, NY 10018 "
+        android:autoLink = "web|email|phone"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:drawableLeft="@drawable/ic_cloud_black_24dp"
+        android:drawableTint="#33ff00"
+        android:textSize="20dp"
+        android:marqueeRepeatLimit="marquee_forever"
+
+        />
+
 
     <TextView
         android:layout_width="0dp"
