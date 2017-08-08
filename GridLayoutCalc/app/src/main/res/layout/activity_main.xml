@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.callor.gridlayoutcalc.MainActivity">
+
+    <!-- 계산결과 표시 창 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp">
+        <!--
+            layout_gravity : TextView의 위치지정
+            gravity : TextView내의 글자의 위치지정
+        -->
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:gravity="right|bottom"
+            android:layout_marginTop="50dp"
+            android:textSize="30sp"
+            android:text="" />
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:columnCount="4"
+        android:orientation="horizontal"
+        android:rowCount="3">
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_columnSpan="2"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="fill_horizontal"
+            android:text="C" />
+
+        <Button
+            android:id="@+id/btn_del"
+            android:layout_columnSpan="2"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="fill_horizontal"
+            android:text="DELL" />
+
+        <Button
+            android:id="@+id/btn_1"
+            android:layout_gravity="fill_horizontal"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/btn_2"
+            android:layout_gravity="fill_horizontal"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/btn_3"
+            android:layout_gravity="fill_horizontal"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/btn_plus"
+            android:layout_gravity="fill_horizontal"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/btn_4"
+            android:layout_gravity="fill_horizontal"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/btn_5"
+            android:layout_gravity="fill_horizontal"
+            android:text="5" />
+        <Button
+            android:id="@+id/btn_6"
+            android:layout_gravity="fill_horizontal"
+            android:text="6" />
+        <Button
+            android:id="@+id/btn_minus"
+            android:layout_gravity="fill_horizontal"
+            android:text="-" />
+        <Button
+            android:id="@+id/btn_7"
+            android:layout_gravity="fill_horizontal"
+            android:text="7" />
+        <Button
+            android:id="@+id/btn_8"
+            android:layout_gravity="fill_horizontal"
+            android:text="8" />
+        <Button
+            android:id="@+id/btn_9"
+            android:layout_gravity="fill_horizontal"
+            android:text="9" />
+        <Button
+            android:id="@+id/btn_times"
+            android:layout_gravity="fill_horizontal"
+            android:text="*" />
+        <Button
+            android:id="@+id/btn_dot"
+            android:layout_gravity="fill_horizontal"
+            android:text="." />
+        <Button
+            android:id="@+id/btn_0"
+            android:layout_gravity="fill_horizontal"
+            android:text="0" />
+        <Button
+            android:id="@+id/btn_eq"
+            android:layout_gravity="fill_horizontal"
+            android:text="=" />
+        <Button
+            android:id="@+id/btn_div"
+            android:layout_gravity="fill_horizontal"
+            android:text="/" />
+    </GridLayout>
+
+</LinearLayout>
