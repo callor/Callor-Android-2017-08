@@ -1,0 +1,4 @@
+<resources>
+    <!-- app 상단 toolbar에 나타나는 제목 -->
+    <string name="app_name">내가만든 계산기</string>
+</resources>

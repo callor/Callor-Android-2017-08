@@ -1,23 +1,17 @@
 package com.callor.gridlayoutcalc;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.renderscript.Double2;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<String> arrayList = new ArrayList();
-    ArrayList<String> arrayArth = new ArrayList();
-    Map<String, String> arithMatic = new HashMap<String, String>();
 
+    double lastNumber = 0;
     String operator = "";
     double num1 = 0 ;
 
@@ -106,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_clear:
                 Log.d("버튼이벤트", Integer.toString(view.getId()));
                 tv_result.setText("");
-                dsum = 0;
+                lastNumber = 0;
                 break;
 
             // 현재 입력된 값만 삭제
@@ -117,10 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_plus:
-                operator = "+";
-                String str = tv_result.getText().toString();
-                num1 = Double.parseDouble(str);
+                lastNumber = Double.valueOf(tv_result.getText().toString());
                 tv_result.setText("");
+                operator = "+";
 
                 /*
                 long lvalue = Long.parseLong(value); // 문자열을 long으로 변환 시키기
@@ -128,47 +121,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tv_result.setText(Long.toString(lsum));
                 */
                 break;
+
             case R.id.btn_minus:
-                operator = "+";
-                String str = tv_result.getText().toString();
-                num1 = Double.parseDouble(str);
+                lastNumber = Double.valueOf(tv_result.getText().toString());
                 tv_result.setText("");
-//                arrayList.add(tv_result.getText().toString());
-//                arrayArth.add("-");
+                operator = "-";
                 break;
 
             case R.id.btn_times:
-                arithMatic.put("number",tv_result.getText().toString());
-                arithMatic.put("operation","*");
-
-//                arrayList.add(tv_result.getText().toString());
-//                arrayArth.add("*");
+                lastNumber = Double.valueOf(tv_result.getText().toString());
                 tv_result.setText("");
+                operator = "*";
                 break;
 
             case R.id.btn_div:
-                arithMatic.put("number",tv_result.getText().toString());
-                arithMatic.put("operation","/");
-
-//                arrayList.add(tv_result.getText().toString());
-//                arrayArth.add("/");
+                lastNumber = Double.valueOf(tv_result.getText().toString());
                 tv_result.setText("");
+                operator = "/";
                 break;
 
             case R.id.btn_eq:
-                tv_result.setText(Double.toString(dsum));
-//                dsum = 0 ;
-//                tv_result.setText("");
+                calcFunc();
+                break;
+
+            // 소수점입력
+            // 이미 입력이 있으면 추가 입력 금지
+            case R.id.btn_dot :
+                lastNumber = Double.valueOf(tv_result.getText().toString());
+//                if(!lastNumber.contains(".")) {
+//                    tv_result.setText(lastNumber + ".");
+//                }
                 break ;
+            // 숫자버튼이면
             default:
+////                lastNumber = Double.parseDouble(tv_result.getText().toString());
+//                if(!operator.isEmpty()) {
+//                    tv_result.setText("");
+//                    operator = "";
+//                }
                 String strResult = tv_result.getText().toString();
                 strResult += ((Button) view).getText(); // 기존 TextView에 입력된 숫자 + 새로운 숫자
-                if(operator.equals("+")) {
-                    dsum += Double.parseDouble(strResult);
-                }
-
                 tv_result.setText(strResult);
                 break ;
+
+        } // end switch
+
+    }
+
+    public void calcFunc() {
+        switch (operator){
+            case "+" :
+                dsum = lastNumber + Double.valueOf(tv_result.getText().toString());
+                break ;
+            case "-" :
+                dsum = lastNumber - Double.valueOf(tv_result.getText().toString());
+                break ;
+            case "*" :
+                dsum = lastNumber * Double.valueOf(tv_result.getText().toString());
+                break ;
+            case "/" :
+                dsum = lastNumber / Double.valueOf(tv_result.getText().toString());
+                break ;
+        }
+        tv_result.setText(String.valueOf(dsum));
+        if(lastNumber != dsum) {
+
         }
     }
 }
