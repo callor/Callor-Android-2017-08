@@ -8,12 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     double lastNumber = 0;
     String operator = "";
     double num1 = 0 ;
+
+    private ArrayList<String> operatorList;
+    private boolean isPreOperator;
 
     long lsum = 0; // 정수연산을 위한 변수
     double dsum = 0; // 실수연산을 위한 변수
@@ -187,5 +193,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(lastNumber != dsum) {
 
         }
+
+
     }
+    private String calc(String exp) {
+
+
+        ArrayList<Double> numberList = new ArrayList<Double>();
+        StringTokenizer st = new StringTokenizer(exp,"X/+-");
+
+
+        while( st.hasMoreTokens() ) {
+            double number = Double.parseDouble(st.nextToken());
+            numberList.add( number );
+            Log.d("aaa", String.valueOf(number) );
+        }
+
+        double result = numberList.get(0);
+        Log.d("aaa", String.valueOf(result) );
+        for( int i = 0 ; i < operatorList.size() ; i++ ) {
+            String operator = operatorList.get(i);
+
+            if( "*".equals(operator)){
+                result = ( result * numberList.get(i+1));
+            }else if( "/".equals(operator)){
+                result = ( result / numberList.get(i+1));
+            }else if( "+".equals(operator)){
+                result = ( result + numberList.get(i+1));
+            }else if( "-".equals(operator)){
+                result = ( result - numberList.get(i+1));
+            }
+        }
+        operatorList.clear();
+        numberList.clear();
+
+        return String.valueOf(result);
+    }
+
+
 }
