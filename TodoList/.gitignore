@@ -7,3 +7,16 @@
 /build
 /captures
 .externalNativeBuild
+
+# 안드로이드 빌드 파일
+*.apk
+*.ap_
+
+# 자바 빌드파일
+*.class
+
+# Dalvik VM 파일
+*.dex
+
+
+
