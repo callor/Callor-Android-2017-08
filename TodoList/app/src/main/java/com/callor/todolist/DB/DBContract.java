@@ -26,7 +26,7 @@ public class DBContract {
 
         // create table if not exits TODO_TABLE ( IN_DATE_TIME TEXT, TODO_MEMO TEXT, END_DATE_TIME TEXT )
 
-        public static final String CREATE_TABLE = " CREATE TABLE IF NOT EXITS " +
+        public static final String CREATE_TABLE = " CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " ( " +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_S_DATE + " TEXT NOT NULL , " +

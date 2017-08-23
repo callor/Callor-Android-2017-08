@@ -1,15 +1,13 @@
 package com.callor.todolist;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +15,7 @@ import android.view.View;
 import com.callor.todolist.Adapter.DBAdapter;
 import com.callor.todolist.DB.DBContract;
 import com.callor.todolist.DB.DBHelper;
+import com.callor.todolist.DB.ToDoListVO;
 import com.callor.todolist.databinding.ActivityMainBinding;
 import com.callor.todolist.databinding.ContentMainBinding;
 
@@ -37,10 +36,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             contenBindig = mainBinding.contentMain ;
             setSupportActionBar(mainBinding.toolbar);
 
-            DBAdapter dbAdapter = new DBAdapter();
+            //--------------------------------------------
+            // Recycler View DB 연동하는
+            // 데이터를 읽어 cursor로 추출하는 과정
+            DBHelper dbHelper = new DBHelper(MainActivity.this);
+            Cursor cursor = dbHelper.getDbAll();
+
+            // cursor를 DBAdapter에 보내주고
+            DBAdapter dbAdapter = new DBAdapter(MainActivity.this,cursor);
+
+            // Recycler 모양을 관리할 관리자를 설정
             LinearLayoutManager manager = new LinearLayoutManager(MainActivity.this);
+
+            // 관리자와 Recycler를 연동
             contenBindig.listBody.setLayoutManager(manager);
+
+            // DBAdapter와 Recycler를 연동
             contenBindig.listBody.setAdapter(dbAdapter);
+            //-------------------------------------------------
+
             contenBindig.btnInsert.setOnClickListener(this);
 
             mainBinding.fab.setOnClickListener(new View.OnClickListener() {
@@ -61,40 +75,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Snackbar.make(view,"할일을 입력한 후 확인 버튼을 눌러 주세요",Snackbar.LENGTH_LONG).show();
             return;
         }
-        // 할일을 입력되었으면 Db Insert 작업 시작
-        //1. 현재 날짜와 시각을 구하기
-        //   1970. 1. 1 00:00:00 초부터 흐른 밀리초 값
-        long now = System.currentTimeMillis();
 
-        // 밀리초 값을 Date 형으로 변환하는
-        Date curDate = new Date(now);
-
-        // 날짜형식의 값을 원하는 형태의 문자열 날짜로 변환시키는 방법
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String getDate = dateFormat.format(curDate);
-
-        // 날짜형식의 값을 원하는 형태의 문자열 시각으로 변환시키는 방법
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:SS");
-        String getTime = timeFormat.format(curDate);
-
-        String strMemo = contenBindig.tvMemo.getText().toString();
-
-        // DB에 Insert 준비
+        // 8-23
         DBHelper dbHelper = new DBHelper(MainActivity.this);
-        SQLiteDatabase dbConn = dbHelper.getWritableDatabase();
+        ToDoListVO vo = new ToDoListVO();
 
-        // SQL을 실행할 준비
-        ContentValues sqlValues = new ContentValues();
-        sqlValues.put(DBContract.ToDoTable.COL_S_DATE,getDate);
-        sqlValues.put(DBContract.ToDoTable.COL_S_TIME,getTime);
-        sqlValues.put(DBContract.ToDoTable.COL_MEMO,strMemo);
+        // DB에 Insert 값을 VO에 할당(저장)
+        vo.setToDoMemo(contenBindig.tvMemo.getText().toString());
 
-        // Insert SQL을 실행하는 문장
-        long newId = dbConn.insert(DBContract.ToDoTable.TABLE_NAME,null,sqlValues);
+        long newId = dbHelper.saveData(vo);
 
         String okMessage = "DB Insert OK \n" +
                 "ID:" +String.valueOf(newId);
         Snackbar.make(view,okMessage,Snackbar.LENGTH_SHORT).show();
+
+        // 입력창 비우기
+        contenBindig.tvMemo.setText("");
+
+        // 추가후 새로 갱신
+        dbHelper = new DBHelper(MainActivity.this);
+        DBAdapter ad = new DBAdapter(MainActivity.this,dbHelper.getDbAll());
+        contenBindig.listBody.setAdapter(ad);
+
     }
 
     @Override
