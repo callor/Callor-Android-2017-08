@@ -1,4 +1,4 @@
-package com.callor.todolist;
+package com.callor.todolist.DB;
 
 import android.provider.BaseColumns;
 
@@ -18,23 +18,22 @@ public class DBContract {
         //      할일을 등록한 날짜와 시각
         //      할일
         //      완료한 날짜와 시각
-        public static final String COL_DATE_TIME = "IN_DATE_TIME";
-        public static final String COL_TODO = "TODO_MEMO" ;
-        public static final String COL_END_DATE_TIME = "END_DATE_TIME";
-
+        public static final String COL_S_DATE = "S_DATE";
+        public static final String COL_S_TIME = "S_TIME";
+        public static final String COL_MEMO = "TODO_MEMO" ;
+        public static final String COL_E_DATE = "E_DATE";
+        public static final String COL_E_TIME = "E_TIME" ;
 
         // create table if not exits TODO_TABLE ( IN_DATE_TIME TEXT, TODO_MEMO TEXT, END_DATE_TIME TEXT )
+
         public static final String CREATE_TABLE = " CREATE TABLE IF NOT EXITS " +
                 TABLE_NAME + " ( " +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_DATE_TIME + " TEXT, " +
-                COL_TODO + " TEXT, " +
-                COL_END_DATE_TIME + " TEXT )";
-
-
-
-
-
+                COL_S_DATE + " TEXT NOT NULL , " +
+                COL_S_TIME + " TEXT NOT NULL , " +
+                COL_MEMO + " TEXT NOT NULL , " +
+                COL_E_DATE + " TEXT, " +
+                COL_E_TIME + " TEXT )  " ;
     }
 
 }

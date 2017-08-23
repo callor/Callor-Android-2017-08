@@ -1,4 +1,4 @@
-package com.callor.todolist;
+package com.callor.todolist.DB;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // DB가 업그레이드 되었을때
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int old_Version, int new_Version) {
         // i 와 i1 을 비교해서
         // 숫자가 차이가 나면
         // 그에 따른 DB upgrade 코드를 작성해 두면 된다.

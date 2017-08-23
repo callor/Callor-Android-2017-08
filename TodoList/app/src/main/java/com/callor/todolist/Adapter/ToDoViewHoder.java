@@ -1,8 +1,10 @@
-package com.callor.todolist;
+package com.callor.todolist.Adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.callor.todolist.R;
 
 /**
  * Created by callor on 2017-08-21.
