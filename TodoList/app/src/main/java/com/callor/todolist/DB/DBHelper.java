@@ -91,6 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // select COl_S_DATE, COL_S_TIME, COL_MEMO
         String[] projection = {
+            DBContract.ToDoTable._ID,
             DBContract.ToDoTable.COL_S_DATE,
             DBContract.ToDoTable.COL_S_TIME,
             DBContract.ToDoTable.COL_MEMO,

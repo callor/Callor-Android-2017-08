@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String okMessage = "DB Insert OK \n" +
                 "ID:" +String.valueOf(newId);
-        Snackbar.make(view,okMessage,Snackbar.LENGTH_SHORT).show();
+//        Snackbar.make(view,okMessage,Snackbar.LENGTH_SHORT).show();
 
         // 입력창 비우기
         contenBindig.tvMemo.setText("");
