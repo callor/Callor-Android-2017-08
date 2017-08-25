@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.callor.todolist.MainActivity"
         tools:showIn="@layout/activity_main">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_insert"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="10dp"
+            android:text="확인"
+            android:textSize="20sp"
+            app:layout_constraintRight_toRightOf="parent" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tv_layout"
-                android:layout_width="0dp"
-                android:layout_weight="4"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/tv_memo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="할일을 입력하세요" />
-            </android.support.design.widget.TextInputLayout>
-            <Button
-                android:id="@+id/btn_insert"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_gravity="right"
-                android:text="확인"
-                android:textSize="20sp"/>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tv_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_insert">
 
-        </LinearLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tv_memo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="할일을 입력하세요" />
+        </android.support.design.widget.TextInputLayout>
 
         <!-- ListView 대체 -->
         <android.support.v7.widget.RecyclerView
@@ -48,7 +42,7 @@
             android:layout_marginBottom="50dp"
             android:background="#38c908"
             app:layout_constraintTop_toBottomOf="@+id/tv_layout" />
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>
 
     <!--
