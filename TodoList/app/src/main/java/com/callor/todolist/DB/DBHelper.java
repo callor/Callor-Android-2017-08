@@ -94,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
             DBContract.ToDoTable._ID,
             DBContract.ToDoTable.COL_S_DATE,
             DBContract.ToDoTable.COL_S_TIME,
-            DBContract.ToDoTable.COL_MEMO,
+            DBContract.ToDoTable.COL_MEMO
         };
 
         Cursor cursor = dbConn.query(
