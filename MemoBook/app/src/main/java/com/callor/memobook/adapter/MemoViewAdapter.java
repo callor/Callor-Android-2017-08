@@ -1,11 +1,13 @@
 package com.callor.memobook.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.constraint.solver.widgets.ConstraintAnchor;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +50,8 @@ public class MemoViewAdapter extends RecyclerView.Adapter<MemoViewAdapter.MemoVi
     }
 
 
-    public class MemoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MemoViewHolder extends RecyclerView.ViewHolder
+                implements View.OnClickListener{
 
         TextView txt_item_date = null;
         TextView txt_item_time = null;
@@ -87,15 +90,23 @@ public class MemoViewAdapter extends RecyclerView.Adapter<MemoViewAdapter.MemoVi
 
         @Override
         public void onClick(View view) {
-            long _id = Long.valueOf(item_layout.getTag().toString());
+
             String strMemo = txt_item_memo.getText().toString();
+            long _id = Long.valueOf(item_layout.getTag().toString());
 
             Intent memoIntent = new Intent(context,MemoEditor.class);
-
             memoIntent.putExtra("memo",strMemo);
             memoIntent.putExtra("_id",_id);
 
-            context.startActivity(memoIntent);
+            Log.d("_ID-01",String.valueOf(_id));
+            // startActivityForResult를 사용하기 위해서
+            // context를 Activity로 강제 형변환시키고
+            // start...ForResult 메서드를 호출한다.
+            // Key = 2
+            int key = 2;
+            // Memo Editer 열기
+            ((Activity)context).startActivityForResult(memoIntent,key);
+
         }
     }
 }

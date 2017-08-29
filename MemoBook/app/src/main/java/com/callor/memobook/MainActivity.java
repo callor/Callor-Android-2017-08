@@ -63,27 +63,59 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // 화면이 다시 나타날때 호출되는 method
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DBHelper dbHelper = new DBHelper(MainActivity.this);
+        // DB를 다시 읽어서 화면갱신
+        MemoViewAdapter adapter = new MemoViewAdapter(MainActivity.this,
+                dbHelper.getListAll()
+        );
+        // 실제 필요없는 코드
+        // 다른 어플뒤로 감춰졌다가 나타나면 오류가 발생하는 경우가 있어 넣어주는 코드
+        recyclerView = (RecyclerView)findViewById(R.id.memo_list) ;
+        recyclerView.setAdapter(adapter);
+    }
 
     // 호출된 Activity가 리턴하면 자동 호출되는 이벤트 메서드
     @Override
     protected void onActivityResult(int req, int res, Intent resultData) {
         super.onActivityResult(req,res,resultData);
         if(res == RESULT_OK) {
+            // Main에서 추가 버튼을 클릭하고 Edit를 호출한 후 되돌아 왔을때
+            DBHelper dbHelper = new DBHelper(MainActivity.this);
             if(req == 1) {
 
                 // DB에 Insert 작업
-                DBHelper dbHelper = new DBHelper(MainActivity.this);
                 String strMemo = resultData.getStringExtra("memo");
-                long newId = dbHelper.saveMemo(strMemo);
-
-                // DB를 다시 읽어서 화면갱신
-                MemoViewAdapter adapter = new MemoViewAdapter(MainActivity.this,
-                        dbHelper.getListAll()
-                        );
-                recyclerView.setAdapter(adapter);
-                Toast.makeText(MainActivity.this,
-                        String.valueOf(newId)+" : "+strMemo, Toast.LENGTH_LONG).show();
+                dbHelper.saveMemo(strMemo);
+//                long newId = dbHelper.saveMemo(strMemo);
+                // 수정 후 되돌아 오면
+            } else if(req == 2) {
+                String strMemo = resultData.getStringExtra("memo");
+                long _id = resultData.getLongExtra("_id",-1);
+                Log.d("_ID",String.valueOf(_id));
+                if(_id != -1) {
+                    dbHelper.update(_id,strMemo);
+                }
             }
+        }
+    }
+
+    private final long FINISH_INTERVAL_TIME = 1000 ; // 1초
+    private long backPressedTime = 0;
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+        if( intervalTime >= 0 && FINISH_INTERVAL_TIME >= intervalTime) {
+            // 종료하기
+            super.onBackPressed();
+        } else {
+            Toast.makeText(MainActivity.this,"한번더 뒤로가기를 누르면 앱을 종료합니다",Toast.LENGTH_LONG).show();
+            backPressedTime = tempTime;
         }
     }
 
