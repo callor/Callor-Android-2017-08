@@ -12,7 +12,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/memo_list"
         android:layout_margin="7dp"
-        android:background="@drawable/rec_background"
+        android:background="@drawable/malibu_beach"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
