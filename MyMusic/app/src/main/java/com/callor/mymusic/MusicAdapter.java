@@ -1,6 +1,7 @@
 package com.callor.mymusic;
 
 
+import android.app.Application;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by callor on 2017-08-29.
@@ -66,6 +71,14 @@ public class MusicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return 0;
     }
 
+    @Override
+    public long getItemId(int position) {
+        if(dataVaid && cursor!=null && cursor.moveToPosition(position)) {
+            return cursor.getLong(rowIdColumn); // _ID 값을 추출하기
+        }
+        return 0;
+    }
+
     // 새로 데이터를 Loading하거나
     // 데이터 갱신되면
     // 기존 화면에 있는 cursor와 변경된 cursor를 바꾸어서
@@ -96,6 +109,15 @@ public class MusicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return oldCursor;
     }
 
+    public List<Long> getMusicIds(){
+        int count = getItemCount();
+        List<Long> list = new ArrayList<>();
+        for(int i = 0 ; i < count ; i++) {
+            list.add(getItemId(i));
+        };
+        return list;
+    }
+
     public class MusicHolder extends RecyclerView.ViewHolder {
 
         // 음악의 표지 앨범들이 저장되는 곳
@@ -111,6 +133,19 @@ public class MusicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             txt_title = (TextView)itemView.findViewById(R.id.txt_item_title);
             txt_sub_title = (TextView)itemView.findViewById(R.id.txt_item_sub_title);
             txt_duration = (TextView)itemView.findViewById(R.id.txt_item_duration);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("music","play");
+                    Log.d("music",getMusicIds().toString());
+                    MusicApp.getMusicInstance()
+                            .getMusicSerceInstance()
+                            .setPlayList(getMusicIds());
+                    MusicApp.getMusicInstance()
+                            .getMusicSerceInstance()
+                            .play();
+                }
+            });
         }
 
         public void bindCursor(Cursor cursor) {
