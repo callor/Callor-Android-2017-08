@@ -94,5 +94,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-
+    public void dbDelete(long _id) {
+        SQLiteDatabase dbConn = this.getWritableDatabase();
+        dbConn.delete(
+                DBContract.TABLE_NAME,
+                DBContract.DBColumn._ID + " = ?",
+                new String[] { String.valueOf(_id)}
+        );
+    }
 }

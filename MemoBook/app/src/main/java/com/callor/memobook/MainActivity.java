@@ -1,14 +1,17 @@
 package com.callor.memobook;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         recyclerView.setLayoutManager(layoutManager);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -118,6 +124,50 @@ public class MainActivity extends AppCompatActivity {
             backPressedTime = tempTime;
         }
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback
+            = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return true ;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            final int position = viewHolder.getAdapterPosition();
+            final long _id = Long.valueOf(viewHolder.itemView.getTag().toString());
+
+            AlertDialog.Builder alertDialogBulder
+                    = new AlertDialog.Builder(MainActivity.this);
+
+            alertDialogBulder.setTitle("메모삭제"); // 제목표시
+            alertDialogBulder.setMessage("정말!! 메모를 삭제하시겠습니까")
+                    .setCancelable(false)
+                    .setPositiveButton("삭제", // ok 버튼의 표시이름
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    DBHelper dbHelper = new DBHelper(MainActivity.this);
+                                    dbHelper.dbDelete(_id);
+
+                                    Cursor cursor = dbHelper.getListAll();
+                                    MemoViewAdapter adapter = new MemoViewAdapter(MainActivity.this,cursor);
+                                    recyclerView.setAdapter(adapter);
+                                }
+                            })
+                    .setNegativeButton("취소",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // 취소버튼을 클릭했을때 할일..
+                                }
+                            });
+            AlertDialog alertDialog = alertDialogBulder.create();
+            alertDialog.show();
+            recyclerView.getAdapter().notifyDataSetChanged();
+        }
+    };
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
