@@ -9,10 +9,18 @@
     tools:context="com.callor.memobook.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/memo_list"
-        android:layout_margin="7dp"
-        android:background="@drawable/bg_hot_pink"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swip_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/memo_list"
+            android:layout_margin="7dp"
+            android:background="@drawable/bg_hot_pink"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

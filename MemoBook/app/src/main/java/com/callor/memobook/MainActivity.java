@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,10 +21,10 @@ import android.widget.Toast;
 import com.callor.memobook.adapter.MemoViewAdapter;
 import com.callor.memobook.db.DBHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     RecyclerView recyclerView = null;
-
+    SwipeRefreshLayout swipeRefreshLayout = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swip_refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
         recyclerView = (RecyclerView)findViewById(R.id.memo_list);
         DBHelper dbHelper = new DBHelper(MainActivity.this);
         Cursor cursor = dbHelper.getListAll();
@@ -188,5 +191,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
