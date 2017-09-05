@@ -76,10 +76,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int viewId = view.getId();
         if(viewId == R.id.btn_call) phoneCall();
         if(viewId == R.id.btn_send_main) sendEmail();
-        if(viewId == R.id.btn_send_sms) sendSms();
+        if(viewId == R.id.btn_send_sms) smsViewSend(); // 창으로 보기
+//            sendSms(); // 바로보내기
+    }
+    // 메시지 창을 띄워서 보내는 방법
+    public void smsViewSend() {
+        String phoneNum = contentBinding.txtPhone.getText().toString();
+        String smsString = contentBinding.txtSms.getText().toString();
 
+        Uri  uri = Uri.parse("smsto:" + phoneNum);
+        Intent smsIntent = new Intent(Intent.ACTION_SENDTO,uri);
+        smsIntent.putExtra("sms_body",smsString);
+        startActivity(smsIntent);
     }
 
+    // 바로 전송하기
     public void sendSms() {
         // 입력박스의 전화번호 꺼내기
         String phoneNum = contentBinding.txtPhone.getText().toString();
