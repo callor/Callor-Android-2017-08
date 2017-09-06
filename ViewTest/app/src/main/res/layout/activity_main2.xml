@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.callor.viewtest.Main2Activity">
+
+    <LinearLayout
+        android:id="@+id/layout_01"
+        android:background="#e6cece"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시작"/>
+
+        <ProgressBar
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:id="@+id/prog_01"
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#9ee9ea"
+        app:layout_constraintTop_toBottomOf="@+id/layout_01"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_start1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시작"/>
+
+        <ProgressBar
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:id="@+id/prog_02"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:max="100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
+</layout>
