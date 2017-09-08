@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ImageView</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_main">갤러리 이미지 보기</string>
+    <string name="title_activity_main2">크롭 이미지 보기</string>
+</resources>

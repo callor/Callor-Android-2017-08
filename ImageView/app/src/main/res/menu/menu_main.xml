@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.callor.imageview.MainActivity">
+    <item
+        android:id="@+id/action_main2"
+        android:orderInCategory="100"
+        android:title="두번째 Activity"
+        app:showAsAction="never" />
+</menu>
