@@ -1,5 +1,6 @@
 package com.callor.dbexam;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.callor.dbexam.databinding.ActivityMainBinding;
 import com.callor.dbexam.databinding.ContentMainBinding;
 import com.callor.dbexam.db.DBHelper;
+import com.callor.dbexam.db.MemberListView;
 import com.callor.dbexam.db.MemberVO;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,6 +76,39 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        contentBinding.btnIdCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userId = contentBinding.userId.getText().toString();
+                DBHelper dbHelper = new DBHelper(MainActivity.this);
+                if(dbHelper.idCheck(userId)) {
+                    Toast.makeText(MainActivity.this,"이미 등록된 ID 입니다",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        contentBinding.btnEmailCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userEmail = contentBinding.userEmail.getText().toString();
+                DBHelper dbHelper = new DBHelper(MainActivity.this);
+                if(dbHelper.emailCheck(userEmail)) {
+                    Toast.makeText(MainActivity.this,"이미 등록된 Email 주소입니다",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        contentBinding.btnListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent listIntent = new Intent(MainActivity.this, MemberListView.class);
+                startActivity(listIntent);
+            }
+        });
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
