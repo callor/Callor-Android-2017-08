@@ -47,7 +47,7 @@ public class MemberViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return 0;
+        return memberVO.size();
     }
 
     // layout/member_item.xml 파일을 가져와서,
